@@ -256,9 +256,9 @@ extra-paths option to specify them:
     import zope.testrunner
     <BLANKLINE>
     if __name__ == '__main__':
-        zope.testrunner.run([
+        sys.exit(zope.testrunner.run([
             '--test-path', '/sample-buildout/demo',
-            ])
+            ]))
 
 We can use the working-directory option to specify a working
 directory:
@@ -300,9 +300,9 @@ directory:
     import zope.testrunner
     <BLANKLINE>
     if __name__ == '__main__':
-        zope.testrunner.run([
+        sys.exit(zope.testrunner.run([
             '--test-path', '/sample-buildout/demo',
-            ])
+            ]))
 
 Now that out tests use a specified working directory, their designated
 part directory is gone:
@@ -356,11 +356,11 @@ using the -v option:
     import zope.testrunner
     <BLANKLINE>
     if __name__ == '__main__':
-        zope.testrunner.run((['--tests-pattern', '^f?tests$',
+        sys.exit(zope.testrunner.run((['--tests-pattern', '^f?tests$',
     '-v'
     ]) + [
             '--test-path', '/sample-buildout/demo',
-            ])
+            ]))
 
 Some things to note from this example:
 
@@ -454,9 +454,9 @@ the environment variable. Also, the tests pass again:
     import zope.testrunner
     <BLANKLINE>
     if __name__ == '__main__':
-        zope.testrunner.run([
+        sys.exit(zope.testrunner.run([
             '--test-path', '/sample-buildout/demo',
-            ])
+            ]))
 
     >>> print system(os.path.join(sample_buildout, 'bin', 'testdemo') + ' -vv'),
     Running tests at level 1
@@ -511,11 +511,11 @@ end of the script:
     import zope.testrunner
     <BLANKLINE>
     if __name__ == '__main__':
-        zope.testrunner.run((['--tests-pattern', '^f?tests$',
+        sys.exit(zope.testrunner.run((['--tests-pattern', '^f?tests$',
     '-v'
     ]) + [
             '--test-path', '/sample-buildout/demo',
-            ])
+            ]))
 
 This will also work with a multi-line initialization section:
 
@@ -561,11 +561,11 @@ This will also work with a multi-line initialization section:
     import zope.testrunner
     <BLANKLINE>
     if __name__ == '__main__':
-        zope.testrunner.run((['--tests-pattern', '^f?tests$',
+        sys.exit(zope.testrunner.run((['--tests-pattern', '^f?tests$',
     '-v'
     ]) + [
             '--test-path', '/sample-buildout/demo',
-            ])
+            ]))
 
 If the relative-paths option is used, egg (and extra) paths are
 generated relative to the test script.
@@ -615,9 +615,9 @@ generated relative to the test script.
     import zope.testrunner
     <BLANKLINE>
     if __name__ == '__main__':
-        zope.testrunner.run([
+        sys.exit(zope.testrunner.run([
             '--test-path', join(base, 'demo'),
-            ])
+            ]))
 
 The relative-paths option can be specified at the buildout level:
 
@@ -666,7 +666,7 @@ The relative-paths option can be specified at the buildout level:
     import zope.testrunner
     <BLANKLINE>
     if __name__ == '__main__':
-        zope.testrunner.run([
+        sys.exit(zope.testrunner.run([
             '--test-path', join(base, 'demo'),
-            ])
+            ]))
 
