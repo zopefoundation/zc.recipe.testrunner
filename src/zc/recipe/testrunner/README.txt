@@ -147,7 +147,8 @@ Now when we run the buildout:
 
     >>> import os
     >>> os.chdir(sample_buildout)
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
 We get a test script installed in our bin directory:
 
@@ -167,13 +168,15 @@ And updating leaves its contents intact:
     ...            ' -q --coverage=coverage')
     >>> ls(sample_buildout, 'parts', 'testdemo')
     d  coverage
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
     >>> ls(sample_buildout, 'parts', 'testdemo')
     d  coverage
 
 We can run the test script to run our demo test:
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'test') + ' -vv'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'test') + ' -vv'),
+    ...        end='')
     Running tests at level 1
     Running zope.testrunner.layer.UnitTests tests:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
@@ -202,7 +205,8 @@ script will get it's name from the part:
     ... eggs = demo
     ... """)
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
     >>> ls(sample_buildout, 'bin')
     -  buildout
@@ -210,7 +214,8 @@ script will get it's name from the part:
 
 We can run the test script to run our demo test:
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'testdemo') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'testdemo') + ' -q'),
+    ...        end='')
     Running zope.testrunner.layer.UnitTests tests:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
       Ran 1 tests with 0 failures and 0 errors in 0.001 seconds.
@@ -233,7 +238,8 @@ extra-paths option to specify them:
     ... extra-paths = /usr/local/zope/lib/python
     ... """)
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
     >>> cat(sample_buildout, 'bin', 'testdemo')
     #!/usr/local/bin/python2.4
@@ -277,7 +283,8 @@ directory:
     ... working-directory = /foo/bar
     ... """)
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
     >>> cat(sample_buildout, 'bin', 'testdemo')
     #!/usr/local/bin/python2.4
@@ -333,7 +340,8 @@ using the -v option:
     ...            ]
     ... """)
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
     >>> cat(sample_buildout, 'bin', 'testdemo')
     #!/usr/local/bin/python2.4
@@ -387,7 +395,9 @@ include a check for an environment variable:
 
 Running them with the current buildout will produce a failure:
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'testdemo') + ' -vv'), # doctest: +ELLIPSIS
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'testdemo')
+    ...               + ' -vv'),
+    ...        end='') # doctest: +ELLIPSIS
     Running tests at level 1
     Running zope.testrunner.layer.UnitTests tests:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
@@ -399,8 +409,7 @@ Running them with the current buildout will produce a failure:
     Traceback (most recent call last):
       ...
     AssertionError: '42' != '23'
-    <BLANKLINE>
-    <BLANKLINE>
+    ...
       Ran 1 tests with 1 failures and 0 errors in 0.001 seconds.
     Tearing down left over layers:
       Tear down zope.testrunner.layer.UnitTests in 0.001 seconds.
@@ -431,7 +440,8 @@ runner:
 We run buildout and see that the test runner script now includes setting up
 the environment variable. Also, the tests pass again:
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
     >>> cat(sample_buildout, 'bin', 'testdemo')
     #!/usr/local/bin/python2.4
@@ -458,7 +468,8 @@ the environment variable. Also, the tests pass again:
             '--test-path', '/sample-buildout/demo',
             ]))
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'testdemo') + ' -vv'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'testdemo')+' -vv'),
+    ...        end='')
     Running tests at level 1
     Running zope.testrunner.layer.UnitTests tests:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
@@ -472,7 +483,7 @@ One can add initialization steps in the buildout.  These will be added to the
 end of the script:
 
     >>> write(sample_buildout, 'buildout.cfg',
-    ... """
+    ... r"""
     ... [buildout]
     ... develop = demo
     ... parts = testdemo
@@ -485,10 +496,11 @@ end of the script:
     ... defaults = ['--tests-pattern', '^f?tests$',
     ...             '-v'
     ...            ]
-    ... initialization = print 'Hello all you egg-laying pythons!'
+    ... initialization = sys.stdout.write('Hello all you egg-laying pythons!\n')
     ... """)
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
     >>> cat(sample_buildout, 'bin', 'testdemo')
     #!/usr/local/bin/python2.4
@@ -506,7 +518,7 @@ end of the script:
     import os
     sys.argv[0] = os.path.abspath(sys.argv[0])
     os.chdir('/sample-buildout/parts/testdemo')
-    print 'Hello all you egg-laying pythons!'
+    sys.stdout.write('Hello all you egg-laying pythons!\n')
     <BLANKLINE>
     import zope.testrunner
     <BLANKLINE>
@@ -520,7 +532,7 @@ end of the script:
 This will also work with a multi-line initialization section:
 
     >>> write(sample_buildout, 'buildout.cfg',
-    ... """
+    ... r"""
     ... [buildout]
     ... develop = demo
     ... parts = testdemo
@@ -533,11 +545,12 @@ This will also work with a multi-line initialization section:
     ... defaults = ['--tests-pattern', '^f?tests$',
     ...             '-v'
     ...            ]
-    ... initialization = print 'Hello all you egg-laying pythons!'
-    ...                  print 'I thought pythons were live bearers?'
+    ... initialization = sys.stdout.write('Hello all you egg-laying pythons!\n')
+    ...               sys.stdout.write('I thought pythons were live bearers?\n')
     ... """)
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
     >>> cat(sample_buildout, 'bin', 'testdemo')
     #!/usr/local/bin/python2.4
@@ -555,8 +568,8 @@ This will also work with a multi-line initialization section:
     import os
     sys.argv[0] = os.path.abspath(sys.argv[0])
     os.chdir('/sample-buildout/parts/testdemo')
-    print 'Hello all you egg-laying pythons!'
-    print 'I thought pythons were live bearers?'
+    sys.stdout.write('Hello all you egg-laying pythons!\n')
+    sys.stdout.write('I thought pythons were live bearers?\n')
     <BLANKLINE>
     import zope.testrunner
     <BLANKLINE>
@@ -585,7 +598,8 @@ generated relative to the test script.
     ... relative-paths = true
     ... """)
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
     >>> cat(sample_buildout, 'bin', 'testdemo')
     #!/usr/local/bin/python2.4
@@ -636,7 +650,8 @@ The relative-paths option can be specified at the buildout level:
     ...               ${buildout:directory}/sources
     ... """)
 
-    >>> print system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
+    ...        end='')
 
     >>> cat(sample_buildout, 'bin', 'testdemo')
     #!/usr/local/bin/python2.4
