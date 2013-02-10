@@ -2,37 +2,16 @@
 Change History
 **************
 
-1.4.1 (unreleased)
-==================
-
-- fix tests with zc.buildout 1.5.2
-
-1.4.0 (2010-08-27)
-==================
-
-- Update to using zc.buildout 1.5.0 script generation.  This adds the
-  following options: include-site-packages, allowed-eggs-from-site-packages,
-  extends, and exec-sitecustomize.
-
-- Merge fixes from 1.2.1 (svn://svn.zope.org/repos/main/zc.recipe.testrunner/tags/1.2.1)
-  Excluding nailing zope.testing version. That fixes a bunch of windows issues
-
 1.3.0 (2010-06-09)
 ==================
 
 - Updated tests to run with the last versions of all modules.
 
-- Removed the usage of the deprecated zope.testing.doctest, thereby also
+- Removed the usage of the deprecated zope.testing.doctest, therby also
   dropping Python 2.3 support.
 
 - Started using zope.testrunner instead of zope.testing.testrunner.
 
-1.2.1 (2010-08-24)
-==================
-
-- Fixed a lot of windows issues
-- Nailed versions to ZTK 1.0a2 (oh well, we have to have at least some stability)
-- Fixed some other test failures that seemed to come from other packages
 
 1.2.0 (2009-03-23)
 ==================
