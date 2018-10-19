@@ -7,7 +7,7 @@ def read(*rnames):
 name = "zc.recipe.testrunner"
 setup(
     name = name,
-    version = "2.0.0",
+    version='2.1.dev0',
     author = "Jim Fulton",
     author_email = "jim@zope.com",
     description = "ZC Buildout recipe for creating test runners",
@@ -23,7 +23,7 @@ setup(
         ),
     license = "ZPL 2.1",
     keywords = "development build testing",
-    url='http://svn.zope.org/zc.buildout',
+    url='https://github.com/zopefoundation/zc.recipe.testrunner',
 
     packages = find_packages('src'),
     include_package_data = True,
