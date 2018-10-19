@@ -183,7 +183,7 @@ We can run the test script to run our demo test:
       Running:
      test (demo.tests.TestDemo)
      test2 (demo2.tests.Demo2Tests)
-      Ran 2 tests with 0 failures and 0 errors in 0.000 seconds.
+      Ran 2 tests with 0 failures, 0 errors and 0 skipped in 0.001 seconds.
     Tearing down left over layers:
       Tear down zope.testrunner.layer.UnitTests in 0.001 seconds.
 
@@ -218,7 +218,7 @@ We can run the test script to run our demo test:
     ...        end='')
     Running zope.testrunner.layer.UnitTests tests:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
-      Ran 1 tests with 0 failures and 0 errors in 0.001 seconds.
+      Ran 1 tests with 0 failures, 0 errors and 0 skipped in 0.001 seconds.
     Tearing down left over layers:
       Tear down zope.testrunner.layer.UnitTests in 0.001 seconds.
 
@@ -241,17 +241,12 @@ extra-paths option to specify them:
     >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
     ...        end='')
 
-    >>> cat(sample_buildout, 'bin', 'testdemo')
+    >>> cat(sample_buildout, 'bin', 'testdemo')  # doctest: +ELLIPSIS
     #!/usr/local/bin/python2.4
     <BLANKLINE>
     import sys
     sys.path[0:0] = [
-      '/sample-buildout/demo',
-      '/sample-buildout/eggs/zope.testrunner-4.0-py2.3.egg',
-      '/sample-buildout/eggs/zope.interface-3.4.1-py2.4.egg',
-      '/sample-buildout/eggs/zope.exceptions-3.5.2-py2.4.egg',
-      '/sample-buildout/eggs/setuptools-0.6-py1.3.egg',
-      '/usr/local/zope/lib/python',
+      ...
       ]
     <BLANKLINE>
     import os
@@ -286,17 +281,12 @@ directory:
     >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
     ...        end='')
 
-    >>> cat(sample_buildout, 'bin', 'testdemo')
+    >>> cat(sample_buildout, 'bin', 'testdemo')  # doctest: +ELLIPSIS
     #!/usr/local/bin/python2.4
     <BLANKLINE>
     import sys
     sys.path[0:0] = [
-      '/sample-buildout/demo',
-      '/sample-buildout/eggs/zope.testrunner-4.0-py2.3.egg',
-      '/sample-buildout/eggs/zope.interface-3.4.1-py2.4.egg',
-      '/sample-buildout/eggs/zope.exceptions-3.5.2-py2.4.egg',
-      '/sample-buildout/eggs/setuptools-0.6-py1.3.egg',
-      '/usr/local/zope/lib/python',
+      ...
       ]
     <BLANKLINE>
     import os
@@ -343,17 +333,12 @@ using the -v option:
     >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
     ...        end='')
 
-    >>> cat(sample_buildout, 'bin', 'testdemo')
+    >>> cat(sample_buildout, 'bin', 'testdemo')  # doctest: +ELLIPSIS
     #!/usr/local/bin/python2.4
     <BLANKLINE>
     import sys
     sys.path[0:0] = [
-      '/sample-buildout/demo',
-      '/sample-buildout/eggs/zope.testrunner-4.0-py2.3.egg',
-      '/sample-buildout/eggs/zope.interface-3.4.1-py2.4.egg',
-      '/sample-buildout/eggs/zope.exceptions-3.5.2-py2.4.egg',
-      '/sample-buildout/eggs/setuptools-0.6-py1.3.egg',
-      '/usr/local/zope/lib/python',
+      ...
       ]
     <BLANKLINE>
     import os
@@ -410,7 +395,7 @@ Running them with the current buildout will produce a failure:
       ...
     AssertionError: '42' != '23'
     ...
-      Ran 1 tests with 1 failures and 0 errors in 0.001 seconds.
+      Ran 1 tests with 1 failures, 0 errors and 0 skipped in 0.001 seconds.
     Tearing down left over layers:
       Tear down zope.testrunner.layer.UnitTests in 0.001 seconds.
     <BLANKLINE>
@@ -443,16 +428,12 @@ the environment variable. Also, the tests pass again:
     >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
     ...        end='')
 
-    >>> cat(sample_buildout, 'bin', 'testdemo')
+    >>> cat(sample_buildout, 'bin', 'testdemo')  # doctest: +ELLIPSIS
     #!/usr/local/bin/python2.4
     <BLANKLINE>
     import sys
     sys.path[0:0] = [
-      '/sample-buildout/demo',
-      '/sample-buildout/eggs/zope.testrunner-4.0-py2.3.egg',
-      '/sample-buildout/eggs/zope.interface-3.4.1-py2.4.egg',
-      '/sample-buildout/eggs/zope.exceptions-3.5.2-py2.4.egg',
-      '/sample-buildout/eggs/setuptools-0.6-py1.3.egg',
+      ...
       ]
     <BLANKLINE>
     import os
@@ -475,7 +456,7 @@ the environment variable. Also, the tests pass again:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
       Running:
      test (demo.tests.DemoTests)
-      Ran 1 tests with 0 failures and 0 errors in 0.001 seconds.
+      Ran 1 tests with 0 failures, 0 errors and 0 skipped in 0.001 seconds.
     Tearing down left over layers:
       Tear down zope.testrunner.layer.UnitTests in 0.001 seconds.
 
@@ -502,17 +483,12 @@ end of the script:
     >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
     ...        end='')
 
-    >>> cat(sample_buildout, 'bin', 'testdemo')
+    >>> cat(sample_buildout, 'bin', 'testdemo')  # doctest: +ELLIPSIS
     #!/usr/local/bin/python2.4
     <BLANKLINE>
     import sys
     sys.path[0:0] = [
-      '/sample-buildout/demo',
-      '/sample-buildout/eggs/zope.testrunner-4.0-py2.3.egg',
-      '/sample-buildout/eggs/zope.interface-3.4.1-py2.4.egg',
-      '/sample-buildout/eggs/zope.exceptions-3.5.2-py2.4.egg',
-      '/sample-buildout/eggs/setuptools-0.6-py1.3.egg',
-      '/usr/local/zope/lib/python',
+      ...
       ]
     <BLANKLINE>
     import os
@@ -552,17 +528,12 @@ This will also work with a multi-line initialization section:
     >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
     ...        end='')
 
-    >>> cat(sample_buildout, 'bin', 'testdemo')
+    >>> cat(sample_buildout, 'bin', 'testdemo')  # doctest: +ELLIPSIS
     #!/usr/local/bin/python2.4
     <BLANKLINE>
     import sys
     sys.path[0:0] = [
-      '/sample-buildout/demo',
-      '/sample-buildout/eggs/zope.testrunner-4.0-py2.3.egg',
-      '/sample-buildout/eggs/zope.interface-3.4.1-py2.4.egg',
-      '/sample-buildout/eggs/zope.exceptions-3.5.2-py2.4.egg',
-      '/sample-buildout/eggs/setuptools-0.6-py1.3.egg',
-      '/usr/local/zope/lib/python',
+      ...
       ]
     <BLANKLINE>
     import os
@@ -601,7 +572,7 @@ generated relative to the test script.
     >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
     ...        end='')
 
-    >>> cat(sample_buildout, 'bin', 'testdemo')
+    >>> cat(sample_buildout, 'bin', 'testdemo')  # doctest: +ELLIPSIS
     #!/usr/local/bin/python2.4
     <BLANKLINE>
     import os
@@ -613,10 +584,7 @@ generated relative to the test script.
     import sys
     sys.path[0:0] = [
       join(base, 'demo'),
-      join(base, 'eggs/zope.testrunner-4.0.0-py2.4.egg'),
-      join(base, 'eggs/zope.interface-3.5.1-py2.4-linux-i686.egg'),
-      join(base, 'eggs/zope.exceptions-3.5.2-linux-i686.egg'),
-      join(base, 'eggs/setuptools-0.6c9-py2.4.egg'),
+      ...
       '/usr/local/zope/lib/python',
       join(base, 'sources'),
       ]
@@ -653,7 +621,7 @@ The relative-paths option can be specified at the buildout level:
     >>> print_(system(os.path.join(sample_buildout, 'bin', 'buildout') + ' -q'),
     ...        end='')
 
-    >>> cat(sample_buildout, 'bin', 'testdemo')
+    >>> cat(sample_buildout, 'bin', 'testdemo')  # doctest: +ELLIPSIS
     #!/usr/local/bin/python2.4
     <BLANKLINE>
     import os
@@ -665,10 +633,7 @@ The relative-paths option can be specified at the buildout level:
     import sys
     sys.path[0:0] = [
       join(base, 'demo'),
-      join(base, 'eggs/zope.testrunner-4.0.0-py2.4.egg'),
-      join(base, 'eggs/zope.interface-3.5.1-py2.4-linux-i686.egg'),
-      join(base, 'eggs/zope.exceptions-3.5.2-linux-i686.egg'),
-      join(base, 'eggs/setuptools-0.6c9-py2.4.egg'),
+      ...
       '/usr/local/zope/lib/python',
       join(base, 'sources'),
       ]

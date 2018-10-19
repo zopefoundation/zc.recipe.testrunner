@@ -82,20 +82,23 @@ We can run the test script now:
 
 >>> print_(system(os.path.join(sample_buildout, 'bin', 'test') + ' -vv -j2'
 ...               ).replace('\r\n','\n'),
-...        end='')
+...        end='')  # doctest: +ELLIPSIS
 Running tests at level 1
-Running bugfix1.tests.Layer1 tests:
-  Set up bugfix1.tests.Layer1 in 0.000 seconds.
+Running .EmptyLayer tests:
+  Set up .EmptyLayer in 0.000 seconds.
   Running:
- test (bugfix1.tests.TestDemo1)
-  Ran 1 tests with 0 failures and 0 errors in 0.000 seconds.
-[Parallel tests running in bugfix1.tests.Layer2:
-  . LAYER FINISHED]
+  Ran 0 tests with 0 failures, 0 errors and 0 skipped in 0.000 seconds.
+...
+Running bugfix1.tests.Layer1 tests:
+  Running in a subprocess.
+  Set up bugfix1.tests.Layer1 in 0.000 seconds.
+  Ran 1 tests with 0 failures, 0 errors and 0 skipped in 0.000 seconds.
+  Tear down bugfix1.tests.Layer1 in 0.000 seconds.
 Running bugfix1.tests.Layer2 tests:
   Running in a subprocess.
   Set up bugfix1.tests.Layer2 in 0.000 seconds.
-  Ran 1 tests with 0 failures and 0 errors in 0.000 seconds.
-  Tear down bugfix1.tests.Layer2 in 0.001 seconds.
+  Ran 1 tests with 0 failures, 0 errors and 0 skipped in 0.000 seconds.
+  Tear down bugfix1.tests.Layer2 in 0.000 seconds.
 Tearing down left over layers:
-  Tear down bugfix1.tests.Layer1 in 0.001 seconds.
-Total: 2 tests, 0 failures, 0 errors in 0.261 seconds.
+  Tear down .EmptyLayer in 0.000 seconds.
+Total: 2 tests, 0 failures, 0 errors and 0 skipped in 0.281 seconds.
