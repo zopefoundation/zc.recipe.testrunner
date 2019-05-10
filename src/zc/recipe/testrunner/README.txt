@@ -387,7 +387,7 @@ Running them with the current buildout will produce a failure:
     Running zope.testrunner.layer.UnitTests tests:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
       Running:
-     test (demo.tests.DemoTests) (0.000 s)
+     test (demo.tests.DemoTests) (... s)
     <BLANKLINE>
     <BLANKLINE>
     Failure in test test (demo.tests.DemoTests)
