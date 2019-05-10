@@ -23,7 +23,8 @@ import sys
 import zc.buildout.easy_install
 import zc.recipe.egg
 
-class TestRunner:
+
+class TestRunner(object):
 
     def __init__(self, buildout, name, options):
         self.buildout = buildout
@@ -84,35 +85,39 @@ class TestRunner:
             ws, options['executable'],
             self.buildout['buildout']['bin-directory'],
             extra_paths=self.egg.extra_paths,
-            arguments = defaults + (
-                    '[\n'+
+            arguments=defaults + (
+                    '[\n' +
                     ''.join(("        '--test-path', %s,\n" % p)
                             for p in test_paths)
-                    +'        ]'),
-            initialization = initialization,
-            relative_paths = self.egg._relative_paths,
+                    + '        ]'),
+            initialization=initialization,
+            relative_paths=self.egg._relative_paths,
             ))
 
         return dest
 
     update = install
 
-arg_template = """[
-  '--test-path', %(TESTPATH)s,
-  ]"""
 
-initialization_template = """import os
+arg_template = """\
+['--test-path', %(TESTPATH)s,]
+"""
+
+initialization_template = """\
+import os
 sys.argv[0] = os.path.abspath(sys.argv[0])
 os.chdir(%s)
 """
 
-env_template = """os.environ['%s'] = %r
+env_template = """\
+os.environ['%s'] = %r
 """
+
 
 def _relativize(base, path):
     base += os.path.sep
     if sys.platform == 'win32':
-        #windoze paths are case insensitive, but startswith is not
+        # windoze paths are case insensitive, but startswith is not
         base = base.lower()
         path = path.lower()
 
