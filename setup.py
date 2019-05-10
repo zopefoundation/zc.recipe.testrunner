@@ -31,18 +31,18 @@ setup(
     package_dir={'': 'src'},
     namespace_packages=['zc', 'zc.recipe'],
     extras_require={
-        'tests': ['zope.testing']
+        'tests': ['zope.testing'],
     },
     install_requires=[
-        'zc.buildout >=1.2.0',
+        'zc.buildout >= 1.2.0',
         'zope.testrunner',
         'setuptools',
-        'zc.recipe.egg  >=1.2.0',
+        'zc.recipe.egg >= 1.2.0',
     ],
     tests_require=['zope.testing'],
     test_suite=name + '.tests.test_suite',
     entry_points={
-        'zc.buildout': ['default = %s:TestRunner' % name]
+        'zc.buildout': ['default = %s:TestRunner' % name],
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",

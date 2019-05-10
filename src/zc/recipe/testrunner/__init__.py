@@ -99,16 +99,18 @@ class TestRunner(object):
     update = install
 
 
-arg_template = """[
-  '--test-path', %(TESTPATH)s,
-  ]"""
+arg_template = """\
+['--test-path', %(TESTPATH)s,]
+"""
 
-initialization_template = """import os
+initialization_template = """\
+import os
 sys.argv[0] = os.path.abspath(sys.argv[0])
 os.chdir(%s)
 """
 
-env_template = """os.environ['%s'] = %r
+env_template = """\
+os.environ['%s'] = %r
 """
 
 

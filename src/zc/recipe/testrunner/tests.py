@@ -12,24 +12,26 @@
 #
 ##############################################################################
 
-from zc.buildout.testing import mkdir, write, system
-
 import doctest
 import os
 import re
 import shutil
 import tempfile
 import unittest
+
 import zc.buildout.testing
+from zc.buildout.testing import mkdir, write, system
 import zope.testing.renormalizing
 
 
-SETUP_PY = """from setuptools import setup
+SETUP_PY = """\
+from setuptools import setup
 setup(name = "bugfix1")
 """
 
 
-BUILDOUT_CFG = """[buildout]
+BUILDOUT_CFG = """\
+[buildout]
 develop = bugfix1
 parts = testbugfix1
 offline = true
@@ -42,7 +44,8 @@ working-directory = sample_working_dir
 """
 
 
-TESTS_PY = """import unittest
+TESTS_PY = """\
+import unittest
 class Layer1(object):
     pass
 class Layer2(object):
@@ -66,7 +69,8 @@ def test_suite():
 """
 
 
-OUTPUT_COMP = """Running tests at level 1
+OUTPUT_COMP = """\
+Running tests at level 1
 Running .EmptyLayer tests:
 Set up .EmptyLayer
 Running bugfix1.tests.Layer1 tests:
@@ -90,7 +94,8 @@ class AbsPathTest(unittest.TestCase):
     processes. zc.recipe.testrunner sets the working directory for each
     using a relative path. The subprocesses have the given working
     directory already set, but zc.recipe.testrunner tried to set it again
-    and failed ("IOError: No such file or directory")."""
+    and failed ("IOError: No such file or directory").
+    """
 
     def setUp(self):
         self.location = os.getcwd()
@@ -144,12 +149,14 @@ def test_suite():
             'README.txt',
             setUp=setUp, tearDown=zc.buildout.testing.buildoutTearDown,
             checker=zope.testing.renormalizing.RENormalizing(
-                [zc.buildout.testing.normalize_path,
+                [
+                    zc.buildout.testing.normalize_path,
                     zc.buildout.testing.normalize_script,
                     zc.buildout.testing.normalize_egg_py,
                     zc.buildout.testing.normalize_endings,
                     (re.compile('#!\S+py\S*'), '#!python'),
                     (re.compile('\d[.]\d+ seconds'), '0.001 seconds'),
+                    (re.compile('\d[.]\d+ s'), '0.001 s'), 
                     (re.compile('zope.testing-[^-]+-'), 'zope.testing-X-'),
                     (re.compile('zope.testrunner-[^-]+-'),
                      'zope.testrunner-X-'),
