@@ -3,7 +3,8 @@ from setuptools import setup, find_packages
 
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
+        return f.read()
 
 
 name = "zc.recipe.testrunner"
@@ -56,6 +57,7 @@ setup(
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Build Tools",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
