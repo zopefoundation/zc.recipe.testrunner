@@ -1,3 +1,7 @@
+******************
+Test-Runner Recipe
+******************
+
 .. image:: https://travis-ci.com/zopefoundation/zc.recipe.testrunner.svg?branch=master
         :target: https://travis-ci.org/zopefoundation/zc.recipe.testrunner
 
@@ -11,10 +15,6 @@
 .. image:: https://img.shields.io/pypi/pyversions/zc.recipe.testrunner.svg
         :target: https://pypi.org/project/zc.recipe.testrunner/
         :alt: Supported Python versions
-
-******************
-Test-Runner Recipe
-******************
 
 .. contents::
 
