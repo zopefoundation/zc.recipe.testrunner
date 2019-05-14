@@ -154,9 +154,9 @@ def test_suite():
                     zc.buildout.testing.normalize_script,
                     zc.buildout.testing.normalize_egg_py,
                     zc.buildout.testing.normalize_endings,
-                    (re.compile('#!\S+py\S*'), '#!python'),
-                    (re.compile('\d[.]\d+ seconds'), '0.001 seconds'),
-                    (re.compile('\d[.]\d+ s'), '0.001 s'), 
+                    (re.compile(r'#!\S+py\S*'), '#!python'),
+                    (re.compile(r'\d[.]\d+ seconds'), '0.001 seconds'),
+                    (re.compile(r'\d[.]\d+ s'), '0.001 s'),
                     (re.compile('zope.testing-[^-]+-'), 'zope.testing-X-'),
                     (re.compile('zope.testrunner-[^-]+-'),
                      'zope.testrunner-X-'),
@@ -164,7 +164,7 @@ def test_suite():
                     (re.compile('distribute-[^-]+-'), 'setuptools-X-'),
                     (re.compile('zope.interface-[^-]+-'),
                      'zope.interface-X-'),
-                    (re.compile('zope.exceptions-[^-]+-.*\.egg'),
+                    (re.compile(r'zope.exceptions-[^-]+-.*\.egg'),
                         'zope.exceptions-X-pyN.N.egg'),
                     # windows happiness for ``extra-paths``:
                     (re.compile(
@@ -175,10 +175,6 @@ def test_suite():
                     # more windows happiness:
                     (re.compile(r'eggs\\\\'), 'eggs/'),
                     (re.compile(r'parts\\\\'), 'parts/')]
-                ),
-            ), (AbsPathTest())
-        ))
-
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')
+            ),
+        ), (AbsPathTest())
+    ))
