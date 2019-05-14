@@ -14,15 +14,15 @@ setup(
     author_email="jim@zope.com",
     description="ZC Buildout recipe for creating test runners",
     long_description=(
-        read('README.txt')
+        read('README.rst')
         + '\n' +
-        read('CHANGES.txt')
+        read('CHANGES.rst')
         + '\n' +
         'Detailed Documentation\n'
         '**********************\n'
         + '\n' +
-        read('src', 'zc', 'recipe', 'testrunner', 'README.txt')
-        ),
+        read('src', 'zc', 'recipe', 'testrunner', 'README.rst')
+    ),
     license="ZPL 2.1",
     keywords="development build testing",
     url='https://github.com/zopefoundation/zc.recipe.testrunner',

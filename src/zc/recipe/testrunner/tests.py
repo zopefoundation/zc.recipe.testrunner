@@ -109,7 +109,7 @@ class AbsPathTest(unittest.TestCase):
         write(self.tmp, 'bugfix1', 'bugfix1', '__init__.py', '')
         write(self.tmp, 'bugfix1', 'bugfix1', 'tests.py', TESTS_PY)
         write(self.tmp, 'bugfix1', 'setup.py', SETUP_PY)
-        write(self.tmp, 'bugfix1', 'README.txt', '')
+        write(self.tmp, 'bugfix1', 'README.rst', '')
 
         os.chdir(self.tmp)
         zc.buildout.buildout.Buildout(
@@ -146,7 +146,7 @@ def setUp(test):
 def test_suite():
     return unittest.TestSuite((
         doctest.DocFileSuite(
-            'README.txt',
+            'README.rst',
             setUp=setUp, tearDown=zc.buildout.testing.buildoutTearDown,
             checker=zope.testing.renormalizing.RENormalizing(
                 [
