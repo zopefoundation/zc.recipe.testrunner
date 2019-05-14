@@ -2,7 +2,7 @@
 Change History
 **************
 
-2.1 (unreleased)
+2.1 (2019-05-14)
 ================
 
 - Add support for Python 3.5 up to 3.8a3.
