@@ -2,6 +2,12 @@
 Change History
 **************
 
+2.2 (unreleased)
+================
+
+- Nothing changed yet.
+
+
 2.1 (2019-05-14)
 ================
 
