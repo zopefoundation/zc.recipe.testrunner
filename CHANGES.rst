@@ -5,7 +5,7 @@ Change History
 2.1 (unreleased)
 ================
 
-- Added support for Python 3.
+- Add support for Python 3.5 up to 3.8a3.
 
 
 2.0.0 (2013-02-10)
