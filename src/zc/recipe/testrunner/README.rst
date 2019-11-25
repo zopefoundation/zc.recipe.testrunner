@@ -372,7 +372,7 @@ include a check for an environment variable:
     ...
     ... class DemoTests(unittest.TestCase):
     ...    def test(self):
-    ...        self.assertEquals('42', os.environ.get('zc.recipe.testrunner', '23'))
+    ...        self.assertEqual('42', os.environ.get('zc.recipe.testrunner', '23'))
     ...
     ... def test_suite():
     ...     return unittest.makeSuite(DemoTests)
