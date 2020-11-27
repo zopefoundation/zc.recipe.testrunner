@@ -5,7 +5,7 @@ Change History
 2.2 (unreleased)
 ================
 
-- Add support for Python 3.9.
+- Add support for Python 3.9, PyPy2 and PyPy3.
 
 
 2.1 (2019-05-14)
