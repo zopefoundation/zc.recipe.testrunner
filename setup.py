@@ -32,7 +32,7 @@ setup(
     package_dir={'': 'src'},
     namespace_packages=['zc', 'zc.recipe'],
     extras_require={
-        'tests': ['zope.testing'],
+        'test': ['zope.testing'],
     },
     install_requires=[
         'zc.buildout >= 1.2.0',
@@ -58,6 +58,9 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: Implementation :: CPython",
+        "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Software Development :: Build Tools",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
