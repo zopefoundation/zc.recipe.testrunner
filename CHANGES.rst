@@ -2,7 +2,7 @@
 Change History
 **************
 
-2.2 (unreleased)
+2.2 (2020-11-30)
 ================
 
 - Add support for Python 3.9, PyPy2 and PyPy3.
