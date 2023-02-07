@@ -60,11 +60,12 @@ class TestDemo2(unittest.TestCase):
         pass
 
 def test_suite():
+    loader = unittest.TestLoader()
     suite = unittest.TestSuite()
-    suite1 = unittest.makeSuite(TestDemo1)
+    suite1 = loader.loadTestsFromTestCase(TestDemo1)
     suite1.layer = Layer1
     suite.addTest(suite1)
-    suite2 = unittest.makeSuite(TestDemo2)
+    suite2 = loader.loadTestsFromTestCase(TestDemo2)
     suite2.layer = Layer2
     suite.addTest(suite2)
     return suite
@@ -182,6 +183,7 @@ def test_suite():
             'README.rst',
             setUp=setUp, tearDown=zc.buildout.testing.buildoutTearDown,
             checker=checker,
+            optionflags=doctest.ELLIPSIS,
         ),
         AbsPathTest(),
     ))

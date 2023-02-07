@@ -58,7 +58,8 @@ buildout:
     ...        pass
     ...
     ... def test_suite():
-    ...     return unittest.makeSuite(TestDemo)
+    ...     loader = unittest.TestLoader()
+    ...     return loader.loadTestsFromTestCase(TestDemo)
     ... ''')
 
     >>> write(sample_buildout, 'demo', 'setup.py',
@@ -82,7 +83,8 @@ buildout:
     ...        pass
     ...
     ... def test_suite():
-    ...     return unittest.makeSuite(Demo2Tests)
+    ...     loader = unittest.TestLoader()
+    ...     return loader.loadTestsFromTestCase(Demo2Tests)
     ... ''')
 
     >>> write(sample_buildout, 'demo2', 'setup.py',
@@ -108,7 +110,8 @@ Demo 2 depends on demoneeded:
     ...        pass
     ...
     ... def test_suite():
-    ...     return unittest.makeSuite(TestNeeded)
+    ...     loader = unittest.TestLoader()
+    ...     return loader.loadTestsFromTestCase(TestNeeded)
     ... ''')
 
     >>> write(sample_buildout, 'demoneeded', 'setup.py',
@@ -181,8 +184,8 @@ We can run the test script to run our demo test:
     Running zope.testrunner.layer.UnitTests tests:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
       Running:
-     test (demo.tests.TestDemo)
-     test2 (demo2.tests.Demo2Tests)
+     test (demo.tests.TestDemo...)
+     test2 (demo2.tests.Demo2Tests...)
       Ran 2 tests with 0 failures, 0 errors and 0 skipped in 0.001 seconds.
     Tearing down left over layers:
       Tear down zope.testrunner.layer.UnitTests in 0.001 seconds.
@@ -375,7 +378,8 @@ include a check for an environment variable:
     ...        self.assertEqual('42', os.environ.get('zc.recipe.testrunner', '23'))
     ...
     ... def test_suite():
-    ...     return unittest.makeSuite(DemoTests)
+    ...     loader = unittest.TestLoader()
+    ...     return loader.loadTestsFromTestCase(DemoTests)
     ... ''')
 
 Running them with the current buildout will produce a failure:
@@ -387,10 +391,10 @@ Running them with the current buildout will produce a failure:
     Running zope.testrunner.layer.UnitTests tests:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
       Running:
-     test (demo.tests.DemoTests) (... s)
+     test (demo.tests.DemoTests...) (... s)
     <BLANKLINE>
     <BLANKLINE>
-    Failure in test test (demo.tests.DemoTests)
+    Failure in test test (demo.tests.DemoTests...)
     Traceback (most recent call last):
       ...
     AssertionError: '42' != '23'
@@ -400,7 +404,7 @@ Running them with the current buildout will produce a failure:
       Tear down zope.testrunner.layer.UnitTests in 0.001 seconds.
     <BLANKLINE>
     Tests with failures:
-       test (demo.tests.DemoTests)
+       test (demo.tests.DemoTests...)
 
 
 Let's update the buildout to specify the environment variable for the test
@@ -455,7 +459,7 @@ the environment variable. Also, the tests pass again:
     Running zope.testrunner.layer.UnitTests tests:
       Set up zope.testrunner.layer.UnitTests in 0.001 seconds.
       Running:
-     test (demo.tests.DemoTests)
+     test (demo.tests.DemoTests...)
       Ran 1 tests with 0 failures, 0 errors and 0 skipped in 0.001 seconds.
     Tearing down left over layers:
       Tear down zope.testrunner.layer.UnitTests in 0.001 seconds.
@@ -649,4 +653,3 @@ The relative-paths option can be specified at the buildout level:
         sys.exit(zope.testrunner.run([
             '--test-path', join(base, 'demo'),
             ]))
-
