@@ -18,13 +18,15 @@ $Id$
 
 import os
 import os.path
-import pkg_resources
 import sys
+
+import pkg_resources
+
 import zc.buildout.easy_install
 import zc.recipe.egg
 
 
-class TestRunner(object):
+class TestRunner:
 
     def __init__(self, buildout, name, options):
         self.buildout = buildout
