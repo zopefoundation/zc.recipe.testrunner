@@ -2,7 +2,7 @@
 Change History
 **************
 
-2.3 (unreleased)
+3.0 (unreleased)
 ================
 
 - Nothing changed yet.
