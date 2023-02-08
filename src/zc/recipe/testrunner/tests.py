@@ -20,8 +20,10 @@ import tempfile
 import unittest
 
 import zc.buildout.testing
-from zc.buildout.testing import mkdir, write, system
 import zope.testing.renormalizing
+from zc.buildout.testing import mkdir
+from zc.buildout.testing import system
+from zc.buildout.testing import write
 
 
 SETUP_PY = """\
@@ -58,11 +60,12 @@ class TestDemo2(unittest.TestCase):
         pass
 
 def test_suite():
+    loader = unittest.TestLoader()
     suite = unittest.TestSuite()
-    suite1 = unittest.makeSuite(TestDemo1)
+    suite1 = loader.loadTestsFromTestCase(TestDemo1)
     suite1.layer = Layer1
     suite.addTest(suite1)
-    suite2 = unittest.makeSuite(TestDemo2)
+    suite2 = loader.loadTestsFromTestCase(TestDemo2)
     suite2.layer = Layer2
     suite.addTest(suite2)
     return suite
@@ -134,7 +137,6 @@ class AbsPathTest(unittest.TestCase):
 
 def setUp(test):
     zc.buildout.testing.buildoutSetUp(test)
-    zc.buildout.testing.install('six', test)
     zc.buildout.testing.install_develop('zc.recipe.testrunner', test)
     zc.buildout.testing.install_develop('zc.recipe.egg', test)
     zc.buildout.testing.install('zope.testing', test)
@@ -143,38 +145,45 @@ def setUp(test):
     zc.buildout.testing.install('zope.exceptions', test)
 
 
+checker = zope.testing.renormalizing.RENormalizing([
+    zc.buildout.testing.normalize_path,
+    zc.buildout.testing.normalize_script,
+    zc.buildout.testing.normalize_egg_py,
+    zc.buildout.testing.normalize_endings,
+    (re.compile(r'#!\S+py\S*'), '#!python'),
+    (re.compile(r'\d[.]\d+ seconds'), '0.001 seconds'),
+    (re.compile(r'\d[.]\d+ s'), '0.001 s'),
+    (re.compile('zope.testing-[^-]+-'), 'zope.testing-X-'),
+    (re.compile('zope.testrunner-[^-]+-'), 'zope.testrunner-X-'),
+    (re.compile('setuptools-[^-]+-'), 'setuptools-X-'),
+    (re.compile('distribute-[^-]+-'), 'setuptools-X-'),
+    (re.compile('zope.interface-[^-]+-'), 'zope.interface-X-'),
+    (re.compile(r'zope.exceptions-[^-]+-.*\.egg'),
+        'zope.exceptions-X-pyN.N.egg'),
+    # windows happiness for ``extra-paths``:
+    (re.compile(
+        r'[a-zA-Z]:\\\\usr\\\\local\\\\zope\\\\lib\\\\python'),
+        '/usr/local/zope/lib/python'),
+    # windows happiness for ``working-directory``:
+    (re.compile(r'[a-zA-Z]:\\\\foo\\\\bar'), '/foo/bar'),
+    # more windows happiness:
+    (re.compile(r'eggs\\\\'), 'eggs/'),
+    (re.compile(r'parts\\\\'), 'parts/'),
+    # Ignore Setuptools deprecation warnings for now:
+    (re.compile(r'.*EasyInstallDeprecationWarning.*\n'), ''),
+    (re.compile(r'.*SetuptoolsDeprecationWarning.*\n'), ''),
+    # Ignore warnings for Python <= 3.10:
+    (re.compile(r'.*warnings.warn\(\n'), ''),
+])
+
+
 def test_suite():
     return unittest.TestSuite((
         doctest.DocFileSuite(
             'README.rst',
             setUp=setUp, tearDown=zc.buildout.testing.buildoutTearDown,
-            checker=zope.testing.renormalizing.RENormalizing(
-                [
-                    zc.buildout.testing.normalize_path,
-                    zc.buildout.testing.normalize_script,
-                    zc.buildout.testing.normalize_egg_py,
-                    zc.buildout.testing.normalize_endings,
-                    (re.compile(r'#!\S+py\S*'), '#!python'),
-                    (re.compile(r'\d[.]\d+ seconds'), '0.001 seconds'),
-                    (re.compile(r'\d[.]\d+ s'), '0.001 s'),
-                    (re.compile('zope.testing-[^-]+-'), 'zope.testing-X-'),
-                    (re.compile('zope.testrunner-[^-]+-'),
-                     'zope.testrunner-X-'),
-                    (re.compile('setuptools-[^-]+-'), 'setuptools-X-'),
-                    (re.compile('distribute-[^-]+-'), 'setuptools-X-'),
-                    (re.compile('zope.interface-[^-]+-'),
-                     'zope.interface-X-'),
-                    (re.compile(r'zope.exceptions-[^-]+-.*\.egg'),
-                        'zope.exceptions-X-pyN.N.egg'),
-                    # windows happiness for ``extra-paths``:
-                    (re.compile(
-                        r'[a-zA-Z]:\\\\usr\\\\local\\\\zope\\\\lib\\\\python'),
-                     '/usr/local/zope/lib/python'),
-                    # windows happiness for ``working-directory``:
-                    (re.compile(r'[a-zA-Z]:\\\\foo\\\\bar'), '/foo/bar'),
-                    # more windows happiness:
-                    (re.compile(r'eggs\\\\'), 'eggs/'),
-                    (re.compile(r'parts\\\\'), 'parts/')]
-            ),
-        ), (AbsPathTest())
+            checker=checker,
+            optionflags=doctest.ELLIPSIS,
+        ),
+        AbsPathTest(),
     ))
