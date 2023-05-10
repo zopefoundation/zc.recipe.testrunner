@@ -17,7 +17,6 @@ import os
 import re
 import shutil
 import tempfile
-import textwrap
 import unittest
 
 import zc.buildout.testing
@@ -176,30 +175,23 @@ checker = zope.testing.renormalizing.RENormalizing([
     # Ignore warnings for Python <= 3.10:
     (re.compile(r'.*warnings.warn\(\n'), ''),
     # Ignore Setuptools warnings:
-    (re.compile(textwrap.dedent(r'''
-        !!
-
-                \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-                Please avoid running ``setup.py`` and ``easy_install``.
-                Instead, use pypa/build, pypa/installer, pypa/build or
-                other standards-based tools.
-                See https://github.com/pypa/setuptools/issues/917 for details.
-                \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-        !!
-
-          easy_install.initialize_options\(self\)\(?\)?'''), re.M), ''),  # noqa: E501 line too long
-    (re.compile(textwrap.dedent(r'''
-        !!
-
-                \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-                Please avoid running ``setup.py`` directly.
-                Instead, use pypa/build, pypa/installer, pypa/build or
-                other standards-based tools.
-                See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html for details.
-                \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-        !!
-
-          self.initialize_options\(\)\(?\)?'''), re.M), ''),  # noqa: E501 line too long
+    (lambda s: s.replace('*'*80, '')),
+    (lambda s: s.replace('!!\n', '')),
+    (lambda s: s.replace(
+        'Please avoid running ``setup.py`` and ``easy_install``.', '')),
+    (lambda s: s.replace(
+        'Please avoid running ``setup.py`` directly.', '')),
+    (lambda s: s.replace(
+        'Instead, use pypa/build, pypa/installer, pypa/build or', '')),
+    (lambda s: s.replace('other standards-based tools.', '')),
+    (lambda s: s.replace(
+        'See https://github.com/pypa/setuptools/issues/917 for details.', '')),
+    (lambda s: s.replace(
+        'See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html'
+        ' for details.', '')),
+    (lambda s: s.replace('easy_install.initialize_options(self)', '')),
+    (lambda s: s.replace('self.initialize_options()', '')),
+    (lambda s: s.strip()),  # clean up leftovers from replacements
 ])
 
 
