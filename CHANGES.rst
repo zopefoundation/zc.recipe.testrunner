@@ -5,7 +5,7 @@ Change History
 3.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Fix tests to run successfully against newer ``setuptools`` versions.
 
 
 3.0 (2023-02-08)

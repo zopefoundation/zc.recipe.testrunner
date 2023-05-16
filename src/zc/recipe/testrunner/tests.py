@@ -174,6 +174,24 @@ checker = zope.testing.renormalizing.RENormalizing([
     (re.compile(r'.*SetuptoolsDeprecationWarning.*\n'), ''),
     # Ignore warnings for Python <= 3.10:
     (re.compile(r'.*warnings.warn\(\n'), ''),
+    # Ignore Setuptools warnings:
+    (lambda s: s.replace('*'*80, '')),
+    (lambda s: s.replace('!!\n', '')),
+    (lambda s: s.replace(
+        'Please avoid running ``setup.py`` and ``easy_install``.', '')),
+    (lambda s: s.replace(
+        'Please avoid running ``setup.py`` directly.', '')),
+    (lambda s: s.replace(
+        'Instead, use pypa/build, pypa/installer, pypa/build or', '')),
+    (lambda s: s.replace('other standards-based tools.', '')),
+    (lambda s: s.replace(
+        'See https://github.com/pypa/setuptools/issues/917 for details.', '')),
+    (lambda s: s.replace(
+        'See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html'
+        ' for details.', '')),
+    (lambda s: s.replace('easy_install.initialize_options(self)', '')),
+    (lambda s: s.replace('self.initialize_options()', '')),
+    (lambda s: s.strip()),  # clean up leftovers from replacements
 ])
 
 

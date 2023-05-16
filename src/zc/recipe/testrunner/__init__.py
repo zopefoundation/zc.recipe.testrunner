@@ -118,7 +118,7 @@ os.environ['%s'] = %r
 
 def _relativize(base, path):
     base += os.path.sep
-    if sys.platform == 'win32':
+    if sys.platform == 'win32':  # pragma: no cover
         # windoze paths are case insensitive, but startswith is not
         base = base.lower()
         path = path.lower()
@@ -126,5 +126,5 @@ def _relativize(base, path):
     if path.startswith(base):
         path = 'join(base, %r)' % path[len(base):]
     else:
-        path = repr(path)
+        path = repr(path)  # pragma: no cover
     return path
