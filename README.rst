@@ -2,8 +2,8 @@
 Test-Runner Recipe
 ******************
 
-.. image:: https://travis-ci.com/zopefoundation/zc.recipe.testrunner.svg?branch=master
-        :target: https://travis-ci.com/zopefoundation/zc.recipe.testrunner
+.. image:: https://github.com/zopefoundation/zc.recipe.testrunner/actions/workflows/tests.yml/badge.svg
+        :target: https://github.com/zopefoundation/zc.recipe.testrunner/actions/workflows/tests.yml
 
 .. image:: https://coveralls.io/repos/github/zopefoundation/zc.recipe.testrunner/badge.svg?branch=master
         :target: https://coveralls.io/github/zopefoundation/zc.recipe.testrunner?branch=master
