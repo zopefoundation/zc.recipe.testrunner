@@ -182,8 +182,8 @@ checker = zope.testing.renormalizing.RENormalizing([
     (lambda s: s.replace(
         'Please avoid running ``setup.py`` directly.', '')),
     (lambda s: s.replace(
-        'Instead, use pypa/build, pypa/installer, pypa/build or', '')),
-    (lambda s: s.replace('other standards-based tools.', '')),
+        'Instead, use pypa/build, pypa/installer or other', '')),
+    (lambda s: s.replace('standards-based tools.', '')),
     (lambda s: s.replace(
         'See https://github.com/pypa/setuptools/issues/917 for details.', '')),
     (lambda s: s.replace(
