@@ -5,6 +5,8 @@ Change History
 3.1 (unreleased)
 ================
 
+- Drop support for Python 3.7.
+
 - Fix tests to run successfully against newer ``setuptools`` versions.
 
 
