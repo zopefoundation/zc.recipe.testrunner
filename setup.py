@@ -16,16 +16,10 @@ setup(
     author="Jim Fulton",
     author_email="jim@zope.com",
     description="ZC Buildout recipe for creating test runners",
-    long_description=(
-        read('README.rst')
-        + '\n' +
-        read('CHANGES.rst')
-        + '\n' +
-        'Detailed Documentation\n'
-        '**********************\n'
-        + '\n' +
-        read('src', 'zc', 'recipe', 'testrunner', 'README.rst')
-    ),
+    long_description=(read('README.rst') + '\n' + read('CHANGES.rst') + '\n' +
+                      'Detailed Documentation\n'
+                      '**********************\n' + '\n' +
+                      read('src', 'zc', 'recipe', 'testrunner', 'README.rst')),
     license="ZPL 2.1",
     keywords="development build testing",
     url='https://github.com/zopefoundation/zc.recipe.testrunner',
@@ -40,7 +34,7 @@ setup(
     install_requires=[
         'zc.buildout >= 1.2.0',
         'zope.testrunner',
-        'setuptools',
+        'setuptools < 69',
         'zc.recipe.egg >= 1.2.0',
     ],
     tests_require=['zope.testing'],
