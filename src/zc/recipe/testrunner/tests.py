@@ -175,7 +175,7 @@ checker = zope.testing.renormalizing.RENormalizing([
     # Ignore warnings for Python <= 3.10:
     (re.compile(r'.*warnings.warn\(\n'), ''),
     # Ignore Setuptools warnings:
-    (lambda s: s.replace('*'*80, '')),
+    (lambda s: s.replace('*' * 80, '')),
     (lambda s: s.replace('!!\n', '')),
     (lambda s: s.replace(
         'Please avoid running ``setup.py`` and ``easy_install``.', '')),
