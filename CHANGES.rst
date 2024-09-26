@@ -11,7 +11,6 @@ Change History
 
 - Fix tests to run successfully against newer ``setuptools`` versions.
 
-- Pin ``setuptools < 69``, as newer versions break ``zc.buildout``.
 
 3.0 (2023-02-08)
 ================

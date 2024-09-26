@@ -34,7 +34,7 @@ setup(
     install_requires=[
         'zc.buildout >= 1.2.0',
         'zope.testrunner',
-        'setuptools < 69',
+        'setuptools',
         'zc.recipe.egg >= 1.2.0',
     ],
     tests_require=['zope.testing'],
