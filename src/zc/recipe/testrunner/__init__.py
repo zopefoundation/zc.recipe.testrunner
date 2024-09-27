@@ -88,13 +88,13 @@ class TestRunner:
             self.buildout['buildout']['bin-directory'],
             extra_paths=self.egg.extra_paths,
             arguments=defaults + (
-                    '[\n' +
-                    ''.join(("        '--test-path', %s,\n" % p)
-                            for p in test_paths)
-                    + '        ]'),
+                '[\n' +
+                ''.join(("        '--test-path', %s,\n" % p)
+                        for p in test_paths)
+                + '        ]'),
             initialization=initialization,
             relative_paths=self.egg._relative_paths,
-            ))
+        ))
 
         return dest
 
