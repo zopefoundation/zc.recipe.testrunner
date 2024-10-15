@@ -3,10 +3,9 @@
 # https://github.com/zopefoundation/meta/tree/master/config/buildout-recipe
 
 [build-system]
-requires = ["setuptools<74"]
+requires = ["setuptools < 74"]
 build-backend = "setuptools.build_meta"
 
-[tool.coverage]
 [tool.coverage.run]
 branch = true
 source = ["zc.recipe.testrunner"]

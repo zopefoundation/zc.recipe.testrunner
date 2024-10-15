@@ -5,7 +5,7 @@ Change History
 3.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Add support for Python 3.13.
 
 
 3.1 (2024-09-27)
