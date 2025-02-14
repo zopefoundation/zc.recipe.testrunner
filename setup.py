@@ -20,14 +20,14 @@ setup(
                       'Detailed Documentation\n'
                       '**********************\n' + '\n' +
                       read('src', 'zc', 'recipe', 'testrunner', 'README.rst')),
-    license="ZPL 2.1",
+    license="ZPL-2.1",
     keywords="development build testing",
     url='https://github.com/zopefoundation/zc.recipe.testrunner',
     packages=find_packages('src'),
     include_package_data=True,
     package_dir={'': 'src'},
     namespace_packages=['zc', 'zc.recipe'],
-    python_requires='>=3.8',
+    python_requires='>=3.9',
     extras_require={
         'test': ['zope.testing'],
     },
@@ -37,8 +37,6 @@ setup(
         'setuptools',
         'zc.recipe.egg >= 1.2.0',
     ],
-    tests_require=['zope.testing'],
-    test_suite=name + '.tests.test_suite',
     entry_points={
         'zc.buildout': ['default = %s:TestRunner' % name],
     },
@@ -49,7 +47,6 @@ setup(
         "License :: OSI Approved :: Zope Public License",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
