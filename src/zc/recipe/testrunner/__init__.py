@@ -45,8 +45,12 @@ class TestRunner:
         dest = []
         eggs, ws = self.egg.working_set(('zope.testrunner', ))
 
-        test_paths = [ws.find(pkg_resources.Requirement.parse(spec)).location
-                      for spec in eggs]
+        test_paths = []
+        for spec in eggs:
+            dist = ws.find(pkg_resources.Requirement.parse(spec))
+            if dist is None:
+                raise ValueError(f"Requirement not found in working set: {spec}")
+            test_paths.append(dist.location)
 
         defaults = options.get('defaults', '').strip()
         if defaults:

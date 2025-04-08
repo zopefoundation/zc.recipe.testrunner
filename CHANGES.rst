@@ -5,6 +5,8 @@ Change History
 3.2 (unreleased)
 ================
 
+- If distribution is not found, explicitly show its name.
+
 - Drop support for Python 3.8.
 
 - Add support for Python 3.13.
