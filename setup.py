@@ -32,6 +32,7 @@ setup(
         'test': ['zope.testing'],
     },
     install_requires=[
+        'packaging>=23.2',
         'zc.buildout >= 1.2.0',
         'zope.testrunner',
         'setuptools',
