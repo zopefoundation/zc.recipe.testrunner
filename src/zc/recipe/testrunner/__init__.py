@@ -49,7 +49,7 @@ class TestRunner:
         test_paths = []
         for spec in eggs:
             dist = ws.find(pkg_resources.Requirement.parse(spec))
-            if dist is None:
+            if dist is None:  # pragma: no cover
                 new_spec = canonicalize_name(spec)
                 if spec != new_spec:
                     dist = ws.find(pkg_resources.Requirement.parse(new_spec))
