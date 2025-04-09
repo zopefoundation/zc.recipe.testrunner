@@ -9,9 +9,9 @@ Change History
 
 - If distribution is not found, explicitly show its name.
 
-- Drop support for Python 3.8.
-
 - Add support for Python 3.13.
+
+- Drop support for Python 3.8.
 
 
 3.1 (2024-09-27)
