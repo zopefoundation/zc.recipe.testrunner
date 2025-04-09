@@ -2,7 +2,7 @@
 Change History
 **************
 
-3.2 (unreleased)
+3.2 (2025-04-09)
 ================
 
 - If distribution is not found, try its canonical name.

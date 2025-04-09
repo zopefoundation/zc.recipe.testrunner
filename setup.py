@@ -12,7 +12,7 @@ def read(*rnames):
 name = "zc.recipe.testrunner"
 setup(
     name=name,
-    version='3.2.dev0',
+    version='3.2',
     author="Jim Fulton",
     author_email="jim@zope.com",
     description="ZC Buildout recipe for creating test runners",
