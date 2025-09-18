@@ -1,6 +1,5 @@
 import os
 
-from setuptools import find_packages
 from setuptools import setup
 
 
@@ -12,7 +11,7 @@ def read(*rnames):
 name = "zc.recipe.testrunner"
 setup(
     name=name,
-    version='3.3.dev0',
+    version='4.0.dev0',
     author="Jim Fulton",
     author_email="jim@zope.com",
     description="ZC Buildout recipe for creating test runners",
@@ -23,10 +22,7 @@ setup(
     license="ZPL-2.1",
     keywords="development build testing",
     url='https://github.com/zopefoundation/zc.recipe.testrunner',
-    packages=find_packages('src'),
     include_package_data=True,
-    package_dir={'': 'src'},
-    namespace_packages=['zc', 'zc.recipe'],
     python_requires='>=3.9',
     extras_require={
         'test': ['zope.testing'],
@@ -34,7 +30,7 @@ setup(
     install_requires=[
         'packaging>=23.2',
         'zc.buildout >= 1.2.0',
-        'zope.testrunner',
+        'zope.testrunner >= 6.4',
         'setuptools',
         'zc.recipe.egg >= 1.2.0',
     ],
