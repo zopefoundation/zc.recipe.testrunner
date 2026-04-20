@@ -169,6 +169,11 @@ checker = zope.testing.renormalizing.RENormalizing([
     # more windows happiness:
     (re.compile(r'eggs\\\\'), 'eggs/'),
     (re.compile(r'parts\\\\'), 'parts/'),
+    # Ignore pkg_resources deprecation warnings:
+    (re.compile(r'.*pkg_resources is deprecated as an API.*\n'), ''),
+    (re.compile(
+        r'.*from pkg_resources import PkgResourcesDeprecationWarning.*\n'),
+        ''),
     # Ignore Setuptools deprecation warnings for now:
     (re.compile(r'.*EasyInstallDeprecationWarning.*\n'), ''),
     (re.compile(r'.*SetuptoolsDeprecationWarning.*\n'), ''),

@@ -16,11 +16,10 @@
 $Id$
 """
 
+import importlib.metadata
 import os
 import os.path
 import sys
-
-import pkg_resources
 
 import zc.buildout.easy_install
 import zc.recipe.egg
@@ -46,17 +45,20 @@ class TestRunner:
         dest = []
         eggs, ws = self.egg.working_set(('zope.testrunner', ))
 
+        dist_map = {}
+        for d in importlib.metadata.distributions(path=list(ws.entries)):
+            name = d.metadata.get('Name')
+            if name:  # pragma: no branch
+                dist_map.setdefault(canonicalize_name(name),
+                                    str(d.locate_file('')))
+
         test_paths = []
         for spec in eggs:
-            dist = ws.find(pkg_resources.Requirement.parse(spec))
-            if dist is None:  # pragma: no cover
-                new_spec = canonicalize_name(spec)
-                if spec != new_spec:
-                    dist = ws.find(pkg_resources.Requirement.parse(new_spec))
-                if dist is None:
-                    raise ValueError(
-                        f"Requirement not found in working set: {spec}")
-            test_paths.append(dist.location)
+            location = dist_map.get(canonicalize_name(spec))
+            if location is None:  # pragma: no cover
+                raise ValueError(
+                    f"Requirement not found in working set: {spec}")
+            test_paths.append(location)
 
         defaults = options.get('defaults', '').strip()
         if defaults:

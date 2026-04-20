@@ -9,6 +9,8 @@ Change History
 
 - Drop support for Python 3.9.
 
+- Replace ``pkg_resources`` usage with ``importlib.metadata``.
+
 
 4.0 (2025-09-18)
 ================
