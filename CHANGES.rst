@@ -5,7 +5,13 @@ Change History
 4.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Move package metadata from setup.py to pyproject.toml.
+
+- Add support for Python 3.14.
+
+- Drop support for Python 3.9.
+
+- Replace ``pkg_resources`` usage with ``importlib.metadata``.
 
 
 4.0 (2025-09-18)

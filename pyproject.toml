@@ -1,13 +1,61 @@
-# 
-# Generated from:
-# https://github.com/zopefoundation/meta/tree/master/config/buildout-recipe
-
+# Generated with zope.meta (https://zopemeta.readthedocs.io/) from:
+# https://github.com/zopefoundation/meta/tree/master/src/zope/meta/buildout-recipe
 [build-system]
 requires = [
-    "setuptools == 78.1.1",
+    "setuptools >= 78.1.1,< 81",
     "wheel",
 ]
 build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "zc.recipe.testrunner"
+version = "4.1.dev0"
+description = "ZC Buildout recipe for creating test runners"
+license = "ZPL-2.1"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: Buildout",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dynamic = ["readme"]
+requires-python = ">=3.10"
+authors = [
+    {name = "Jim Fulton",email = "jim@zope.com"},
+]
+maintainers = [
+    {name = "Plone Foundation and contributors",email = "zope-dev@zope.dev"},
+]
+dependencies = [
+    "packaging>=23.2",
+    "zc.buildout >= 1.2.0",
+    "zope.testrunner >= 6.4",
+    "setuptools",
+    "zc.recipe.egg >= 1.2.0",
+]
+keywords = ["development", "build", "testing"]
+
+[project.entry-points."zc.buildout"]
+default = "zc.recipe.testrunner:TestRunner"
+
+[project.optional-dependencies]
+test = ["zope.testing"]
+
+[project.urls]
+Source = "https://github.com/zopefoundation/zc.recipe.testrunner"
+Issues = "https://github.com/zopefoundation/zc.recipe.testrunner/issues"
+Changelog = "https://raw.githubusercontent.com/zopefoundation/zc.recipe.testrunner/master/CHANGES.rst"
 
 [tool.coverage.run]
 branch = true
@@ -39,3 +87,7 @@ source = [
     ".tox/*/lib/python*/site-packages/",
     ".tox/pypy*/site-packages/",
 ]
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.rst", "CHANGES.rst"]}
+
