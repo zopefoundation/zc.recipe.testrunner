@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "zc.recipe.testrunner"
-version = "4.1.dev0"
+version = "4.1"
 description = "ZC Buildout recipe for creating test runners"
 license = "ZPL-2.1"
 classifiers = [
