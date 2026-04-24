@@ -57,6 +57,7 @@ EXTRAS_BUILDOUT_CFG = """\
 develop = extrapkg
 parts = testextrapkg
 offline = true
+
 [testextrapkg]
 recipe = zc.recipe.testrunner
 eggs =
