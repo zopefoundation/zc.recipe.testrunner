@@ -5,7 +5,8 @@ Change History
 4.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Fix ``install()`` failing for egg specs with extras (e.g. ``pkg[test]``)
+  by stripping extras before canonicalizing the package name.
 
 
 4.1 (2026-04-23)
