@@ -23,6 +23,7 @@ import sys
 
 import zc.buildout.easy_install
 import zc.recipe.egg
+from packaging.requirements import Requirement as PackagingRequirement
 from packaging.utils import canonicalize_name
 
 
@@ -54,7 +55,8 @@ class TestRunner:
 
         test_paths = []
         for spec in eggs:
-            location = dist_map.get(canonicalize_name(spec))
+            name = PackagingRequirement(spec).name
+            location = dist_map.get(canonicalize_name(name))
             if location is None:  # pragma: no cover
                 raise ValueError(
                     f"Requirement not found in working set: {spec}")

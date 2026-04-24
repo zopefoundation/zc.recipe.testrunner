@@ -31,6 +31,13 @@ from setuptools import setup
 setup(name = "bugfix1")
 """
 
+EXTRAS_SETUP_PY = """\
+from setuptools import setup
+setup(
+    name="extrapkg",
+    extras_require={"test": []},
+)
+"""
 
 BUILDOUT_CFG = """\
 [buildout]
@@ -41,6 +48,19 @@ offline = true
 recipe = zc.recipe.testrunner
 eggs =
     bugfix1
+script = test
+working-directory = sample_working_dir
+"""
+
+EXTRAS_BUILDOUT_CFG = """\
+[buildout]
+develop = extrapkg
+parts = testextrapkg
+offline = true
+[testextrapkg]
+recipe = zc.recipe.testrunner
+eggs =
+    extrapkg[test]
 script = test
 working-directory = sample_working_dir
 """
@@ -135,6 +155,53 @@ class AbsPathTest(unittest.TestCase):
             self.assertIn(line, output)
 
 
+class ExtrasInEggsTest(unittest.TestCase):
+    """Eggs with extras like ``extrapkg[test]`` must be resolved correctly.
+
+    ``canonicalize_name('extrapkg[test]')`` produces ``'extrapkg[test]'``
+    (with the bracket suffix) which does not match the dist-map key
+    ``'extrapkg'``.  The install() method must strip extras before
+    canonicalizing.
+    """
+
+    def setUp(self):
+        self.location = os.getcwd()
+
+        self.tmp = tempfile.mkdtemp(prefix='sample-buildout')
+        write(self.tmp, 'buildout.cfg', EXTRAS_BUILDOUT_CFG)
+        mkdir(self.tmp, 'sample_working_dir')
+        mkdir(self.tmp, 'extrapkg')
+        mkdir(self.tmp, 'extrapkg', 'extrapkg')
+        write(self.tmp, 'extrapkg', 'extrapkg', '__init__.py', '')
+        write(self.tmp, 'extrapkg', 'extrapkg', 'tests.py', TESTS_PY)
+        write(self.tmp, 'extrapkg', 'setup.py', EXTRAS_SETUP_PY)
+        write(self.tmp, 'extrapkg', 'README.rst', '')
+
+        os.chdir(self.tmp)
+
+    def tearDown(self):
+        os.chdir(self.location)
+        shutil.rmtree(self.tmp)
+
+    def runTest(self):
+        # Building the buildout triggers install() which must handle
+        # extras in egg specs.  The bug causes:
+        #   ValueError: Requirement not found in working set: extrapkg[test]
+        zc.buildout.buildout.Buildout(
+            'buildout.cfg',
+            [('buildout', 'log-level', 'WARNING')]
+        ).init('fake-argument')
+
+        output = system(
+            os.path.join(
+                self.tmp,
+                'bin',
+                'test') +
+            ' --list-tests')
+        self.assertNotIn('Requirement not found', output)
+        self.assertNotIn('Error', output)
+
+
 def setUp(test):
     zc.buildout.testing.buildoutSetUp(test)
     zc.buildout.testing.install_develop('zc.recipe.testrunner', test)
@@ -209,4 +276,5 @@ def test_suite():
             optionflags=doctest.ELLIPSIS,
         ),
         AbsPathTest(),
+        ExtrasInEggsTest(),
     ))
