@@ -2,6 +2,12 @@
 Change History
 **************
 
+4.2 (unreleased)
+================
+
+- Nothing changed yet.
+
+
 4.1.1 (2026-04-27)
 ==================
 
