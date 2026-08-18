@@ -5,7 +5,15 @@ Change History
 4.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Support develop eggs installed as PEP 660 editable installs by
+  ``zc.buildout >= 6``: derive ``--test-path`` from the
+  ``__editable__*.pth`` file (or the project root recorded in
+  ``direct_url.json``) instead of the ``develop-eggs`` directory, in
+  which no tests would be found.  The test paths are additionally added
+  to the ``sys.path`` of the generated script, so tests stay importable
+  for editable installs which use an import hook instead of a plain
+  path entry.
+  (`#26 <https://github.com/zopefoundation/zc.recipe.testrunner/issues/26>`_)
 
 
 4.1.1 (2026-04-27)
