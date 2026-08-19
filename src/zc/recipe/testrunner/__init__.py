@@ -159,16 +159,18 @@ def _editable_project_root(dist):
 
 
 def _pth_paths(dist):
-    """Source paths from the dist's ``__editable__*.pth`` file(s).
+    """Source paths from the ``.pth`` file(s) installed by the dist.
 
-    The ``.pth`` files are found via the distribution's ``RECORD``.
+    The ``.pth`` files are found via the distribution's ``RECORD``, so
+    any name works: setuptools writes ``__editable__*.pth``, hatchling
+    ``_editable_impl_*.pth``, other backends use yet other names.
     Mirrors the line filtering of ``zc.buildout.utils.get_pth_paths``;
     relative lines resolve against the ``.pth`` file's own directory.
     """
     paths = []
     for entry in dist.files or ():
         name = os.path.basename(str(entry))
-        if not (name.startswith('__editable__') and name.endswith('.pth')):
+        if not name.endswith('.pth'):
             continue
         pth = str(dist.locate_file(entry))
         try:

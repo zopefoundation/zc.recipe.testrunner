@@ -6,8 +6,8 @@ Change History
 ================
 
 - Support develop eggs installed as PEP 660 editable installs by
-  ``zc.buildout >= 6``: derive ``--test-path`` from the
-  ``__editable__*.pth`` file (or the project root recorded in
+  ``zc.buildout >= 6``: derive ``--test-path`` from the ``.pth`` file
+  the editable install writes (or the project root recorded in
   ``direct_url.json``) instead of the ``develop-eggs`` directory, in
   which no tests would be found.  The test paths are additionally added
   to the ``sys.path`` of the generated script, so tests stay importable

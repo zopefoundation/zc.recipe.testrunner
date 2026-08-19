@@ -208,13 +208,14 @@ class ExtrasInEggsTest(unittest.TestCase):
 
 
 def make_dist_info(tmp, name='pkg', version='1.0', direct_url=None,
-                   pth_lines=None, record=None):
+                   pth_lines=None, record=None, pth_name=None):
     """Create a buildout 6 style develop-eggs layout for a develop egg.
 
     Writes ``develop-eggs/<name>-<version>.dist-info`` with a minimal
     ``METADATA``, optionally ``direct_url.json`` (a dict is serialized as
     JSON, a string is written verbatim), and optionally an accompanying
-    ``__editable__.<name>-<version>.pth`` next to the dist-info.
+    ``.pth`` file next to the dist-info, named ``pth_name`` or, by
+    default, ``__editable__.<name>-<version>.pth``.
 
     ``record`` controls the ``RECORD`` file: ``None`` lists all created
     files, ``False`` omits ``RECORD`` entirely (``dist.files is None``),
@@ -236,7 +237,8 @@ def make_dist_info(tmp, name='pkg', version='1.0', direct_url=None,
         write(develop_eggs, dist_info, 'direct_url.json', direct_url)
         entries.append(f'{dist_info}/direct_url.json')
     if pth_lines is not None:
-        pth_name = f'__editable__.{name}-{version}.pth'
+        if pth_name is None:
+            pth_name = f'__editable__.{name}-{version}.pth'
         write(develop_eggs, pth_name, '\n'.join(pth_lines) + '\n')
         entries.append(pth_name)
     if record is None:
@@ -366,6 +368,16 @@ class DistLocationsTest(unittest.TestCase):
                            record=['pkg-1.0.dist-info/METADATA',
                                    '../../bin/test']),
             [self.project])
+
+    def test_pth_name_is_not_restricted_to_setuptools_naming(self):
+        # Other build backends name their .pth file differently, e.g.
+        # hatchling writes ``_editable_impl_<name>.pth``.  The file is
+        # found via RECORD, so the name does not matter.
+        self.assertEqual(
+            self.locations(direct_url=self.editable_direct_url,
+                           pth_name='_editable_impl_pkg.pth',
+                           pth_lines=[self.src]),
+            [self.src])
 
     def test_relative_pth_line_resolved_against_develop_eggs(self):
         self.assertEqual(
