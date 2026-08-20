@@ -5,7 +5,7 @@ Change History
 4.3 (unreleased)
 ================
 
-- Nothing changed yet.
+- Republish after fixing Trusted Publishing integration.
 
 
 4.2 (2026-08-20)
