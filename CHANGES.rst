@@ -2,7 +2,7 @@
 Change History
 **************
 
-4.2 (unreleased)
+4.2 (2026-08-20)
 ================
 
 - Support develop eggs installed as PEP 660 editable installs by
