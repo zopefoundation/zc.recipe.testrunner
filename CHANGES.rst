@@ -2,8 +2,8 @@
 Change History
 **************
 
-4.3 (unreleased)
-================
+4.2.post1 (2026-08-20)
+======================
 
 - Republish after fixing Trusted Publishing integration.
 
