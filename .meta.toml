@@ -2,7 +2,7 @@
 # https://github.com/zopefoundation/meta/tree/master/src/zope/meta/buildout-recipe
 [meta]
 template = "buildout-recipe"
-commit-id = "27ca14d4"
+commit-id = "3d6accf6"
 
 [python]
 with-pypy = true
@@ -20,3 +20,6 @@ fail-under = 100
 additional-rules = [
     "recursive-include src *.rst",
     ]
+
+[pypi]
+trusted-publishing = true
