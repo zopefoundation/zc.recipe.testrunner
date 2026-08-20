@@ -2,11 +2,10 @@
 # https://github.com/zopefoundation/meta/tree/master/src/zope/meta/buildout-recipe
 [build-system]
 requires = [
-    "setuptools >= 78.1.1,< 81",
+    "setuptools >= 78.1.1,< 82",
     "wheel",
 ]
 build-backend = "setuptools.build_meta"
-
 
 [project]
 name = "zc.recipe.testrunner"
@@ -91,3 +90,7 @@ source = [
 [tool.setuptools.dynamic]
 readme = {file = ["README.rst", "CHANGES.rst"]}
 
+[tool.zest-releaser]
+create-wheel = false
+extra-message = ""
+upload-pypi = false
