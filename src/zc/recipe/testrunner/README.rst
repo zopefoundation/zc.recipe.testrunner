@@ -587,10 +587,12 @@ generated relative to the test script.
     <BLANKLINE>
     import sys
     sys.path[0:0] = [
-      join(base, 'demo'),
+      ...
+      join(base, 'develop-eggs'),
       ...
       '/usr/local/zope/lib/python',
       join(base, 'sources'),
+      join(base, 'demo'),
       ]
     <BLANKLINE>
     import os
@@ -636,10 +638,12 @@ The relative-paths option can be specified at the buildout level:
     <BLANKLINE>
     import sys
     sys.path[0:0] = [
-      join(base, 'demo'),
+      ...
+      join(base, 'develop-eggs'),
       ...
       '/usr/local/zope/lib/python',
       join(base, 'sources'),
+      join(base, 'demo'),
       ]
     <BLANKLINE>
     import os

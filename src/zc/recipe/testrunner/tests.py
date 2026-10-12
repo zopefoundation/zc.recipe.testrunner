@@ -496,6 +496,8 @@ checker = zope.testing.renormalizing.RENormalizing([
     (re.compile(
         r'.*from pkg_resources import PkgResourcesDeprecationWarning.*\n'),
         ''),
+    (re.compile(
+        r'.*from zc.buildout._vendor import pkg_resources .*\n'), ''),
     # Ignore Setuptools deprecation warnings for now:
     (re.compile(r'.*EasyInstallDeprecationWarning.*\n'), ''),
     (re.compile(r'.*SetuptoolsDeprecationWarning.*\n'), ''),

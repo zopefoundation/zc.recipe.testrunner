@@ -2,10 +2,10 @@
 Change History
 **************
 
-4.3 (unreleased)
+5.0 (unreleased)
 ================
 
-- Nothing changed yet.
+- Update support to ``zc.buildout >= 6`` thus requiring at least this version.
 
 
 4.2.post1 (2026-08-20)
