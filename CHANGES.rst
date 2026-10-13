@@ -2,7 +2,7 @@
 Change History
 **************
 
-5.0 (unreleased)
+5.0 (2026-10-13)
 ================
 
 - Update support to ``zc.buildout >= 6`` thus requiring at least that version.
