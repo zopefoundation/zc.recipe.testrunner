@@ -5,7 +5,7 @@ Change History
 5.0 (unreleased)
 ================
 
-- Update support to ``zc.buildout >= 6`` thus requiring at least this version.
+- Update support to ``zc.buildout >= 6`` thus requiring at least that version.
 
 
 4.2.post1 (2026-08-20)
