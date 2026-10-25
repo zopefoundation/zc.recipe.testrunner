@@ -5,7 +5,7 @@ Change History
 5.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Drop support for Python 3.10.
 
 
 5.0 (2026-10-13)
